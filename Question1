@@ -1,0 +1,26 @@
+# Question1 - 
+# Problem Statement: Create a Python script that lists all files 
+# and subdirectories in a given directory. Your script should prompt the user 
+# for the directory path and then display the contents.
+
+import os
+
+def list_directory_contents(path):
+    try:
+        with os.scandir(path) as files:
+            for file in files: 
+                if file.is_dir():
+                    print(f"Directory: {file.name}")
+                elif file.is_file():
+                    print(f"File: {file.name}")
+    except FileNotFoundError:
+        print(f"Directory '{path}' does not exist.")
+    except PermissionError:
+        print(f"Permission not allowed to '{path}")
+    except Exception as e:
+        print(f"An unexpected error occured: {e}")
+
+user_input = input("Which directory path would you like to have displayed:  ")
+
+list_directory_contents(user_input)
+
